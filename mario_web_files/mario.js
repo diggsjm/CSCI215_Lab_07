@@ -11,6 +11,7 @@ var Mario;
 window.onload = init; // calls the function named "init"
 // declare the background image
 var bgImage = new Image();
+var mario1 = new Image();
 
 // Is called when the window loads;
 function init() {
@@ -19,9 +20,10 @@ function init() {
 	// TODO: Put Mario on the ground instead of the cloud
 	Mario = {
 		x: 100,
-		y: 280,
+		y: 615,
 		w: 50,
 		h: 80,
+        backgroundMusic: new Audio('mario_08.wav'),
 		JumpSound: new Audio('jump.wav'),
 		Image: (function() {
 			var temp = new Image();
@@ -34,8 +36,11 @@ function init() {
 
 	bgImage.src = "marioBG.jpg";
 	draw();
-
+    mario1.src = 'mario1.png';
+    draw();
 	// TODO: (OPTIONAL) set mario_08.wav as background music
+
+	Mario.backgroundMusic.play();
 
 }
 
@@ -50,13 +55,13 @@ function draw() {
 	// loaded, you must do it this way
 	bgImage.onload = function(){
 		ctx.drawImage(bgImage, 0, 0);
-
+//        ctx.drawImage(mario1, Mario.x, Mario.y, Mario.w, Mario.h);
     }
 
 	/*
 	 * TODO: Draw Mario's initial image
 	 */
-
+    ctx.drawImage(mario1, Mario.x, Mario.y, Mario.w, Mario.h);
 
 	/////////////////////////////////////////////////////////////////
 	var render = function () {
@@ -79,7 +84,7 @@ function draw() {
 			Mario.Image.src = "mario2.png";
 			ctx.drawImage(Mario.Image, Mario.x, Mario.y, Mario.w, Mario.h);
 			Mario.y += 5; // move 5 px back down after a jump
-		}else if(Mario.y == 280 && Mario.moving == "no"){
+		}else if(Mario.y == 615 && Mario.moving == "no"){
 			Mario.moving = "up";
 			Mario.JumpSound.play();
 		}else{
